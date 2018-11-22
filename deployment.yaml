@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urban-data
+  labels:
+    app: urban-data
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: urban-data
+  template:
+    metadata:
+      labels:
+        app: urban-data
+    spec:
+      containers:
+      - name: nginx
+        image: hhiden/urbansource:latest
+        env:
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "my-cluster-kafka-bootstrap:9092"
+        - name: KAFKA_TOPIC
+          value: "uodata"
+
